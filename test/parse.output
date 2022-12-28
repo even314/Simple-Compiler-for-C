@@ -1,0 +1,2633 @@
+State 23 conflicts: 1 shift/reduce
+State 27 conflicts: 1 shift/reduce
+State 71 conflicts: 1 shift/reduce
+State 128 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: all $end
+
+    1 all: p_list
+
+    2 p_list: p p_list
+    3       | s p_list
+    4       | s
+    5       | p
+
+    6 p: T ID '(' dec_param_list ')' '{' s_list '}'
+    7  | T ID '(' ')' '{' s_list '}'
+
+    8 s_list: s s_list
+    9       | s
+
+   10 s: IF '(' e ')' '{' s_list '}'
+   11  | IF '(' e ')' '{' s_list '}' ELSE '{' s_list '}'
+   12  | WHILE '(' e ')' '{' s_list '}'
+   13  | FOR '(' e ';' e ';' e ')' '{' s_list '}'
+   14  | T Aid_list ';'
+   15  | PRINT '(' param_list ')' ';'
+   16  | e ';'
+   17  | RETURN e ';'
+
+   18 dec_param_list: dec_param ',' dec_param_list
+   19               | dec_param
+
+   20 dec_param: T ID
+
+   21 param_list: e ',' param_list
+   22           | e
+
+   23 Aid_list: Aid ',' Aid_list
+   24         | Aid
+
+   25 Aid: ID '[' NUM ']'
+
+   26 Did_list: Did ',' Did_list
+   27         | Did
+
+   28 Did: ID
+   29    | ID '=' e
+
+   30 e: INPUT '(' ')'
+   31  | T Did_list
+   32  | e OR e
+   33  | e AND e
+   34  | '!' e
+   35  | ID '(' param_list ')'
+   36  | ID '(' ')'
+   37  | '(' e ')'
+   38  | e '<' e
+   39  | e '>' e
+   40  | e LE e
+   41  | e GE e
+   42  | e EQ e
+   43  | e NE e
+   44  | e '+' e
+   45  | e '-' e
+   46  | e '*' e
+   47  | e '/' e
+   48  | e '%' e
+   49  | e '^' e
+   50  | '-' e
+   51  | e '=' e
+   52  | NUM
+   53  | STR
+   54  | ID
+   55  | e INC
+   56  | e DEC
+   57  | INC e
+   58  | DEC e
+   59  | ID '[' e ']'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'!' (33) 34
+'%' (37) 48
+'(' (40) 6 7 10 11 12 13 15 30 35 36 37
+')' (41) 6 7 10 11 12 13 15 30 35 36 37
+'*' (42) 46
+'+' (43) 44
+',' (44) 18 21 23 26
+'-' (45) 45 50
+'/' (47) 47
+';' (59) 13 14 15 16 17
+'<' (60) 38
+'=' (61) 29 51
+'>' (62) 39
+'[' (91) 25 59
+']' (93) 25 59
+'^' (94) 49
+'{' (123) 6 7 10 11 12 13
+'}' (125) 6 7 10 11 12 13
+error (256)
+ID (258) 6 7 20 25 28 29 35 36 54 59
+NUM (259) 25 52
+STR (260) 53
+T (261) 6 7 14 20 31
+INC (262) 55 57
+DEC (263) 56 58
+LE (264) 40
+GE (265) 41
+EQ (266) 42
+NE (267) 43
+AND (268) 33
+OR (269) 32
+IF (270) 10 11
+ELSE (271) 11
+WHILE (272) 12
+FOR (273) 13
+RETURN (274) 17
+PRINT (275) 15
+INPUT (276) 30
+nif (277)
+UMINUS (278)
+
+
+Nonterminals, with rules where they appear
+
+$accept (42)
+    on left: 0
+all (43)
+    on left: 1, on right: 0
+p_list (44)
+    on left: 2 3 4 5, on right: 1 2 3
+p (45)
+    on left: 6 7, on right: 2 5
+s_list (46)
+    on left: 8 9, on right: 6 7 8 10 11 12 13
+s (47)
+    on left: 10 11 12 13 14 15 16 17, on right: 3 4 8 9
+dec_param_list (48)
+    on left: 18 19, on right: 6 18
+dec_param (49)
+    on left: 20, on right: 18 19
+param_list (50)
+    on left: 21 22, on right: 15 21 35
+Aid_list (51)
+    on left: 23 24, on right: 14 23
+Aid (52)
+    on left: 25, on right: 23 24
+Did_list (53)
+    on left: 26 27, on right: 26 31
+Did (54)
+    on left: 28 29, on right: 26 27
+e (55)
+    on left: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+    48 49 50 51 52 53 54 55 56 57 58 59, on right: 10 11 12 13 16 17
+    21 22 29 32 33 34 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51
+    55 56 57 58 59
+
+
+State 0
+
+    0 $accept: . all $end
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 4
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    all     go to state 16
+    p_list  go to state 17
+    p       go to state 18
+    s       go to state 19
+    e       go to state 20
+
+
+State 1
+
+   35 e: ID . '(' param_list ')'
+   36  | ID . '(' ')'
+   54  | ID .
+   59  | ID . '[' e ']'
+
+    '('  shift, and go to state 21
+    '['  shift, and go to state 22
+
+    $default  reduce using rule 54 (e)
+
+
+State 2
+
+   52 e: NUM .
+
+    $default  reduce using rule 52 (e)
+
+
+State 3
+
+   53 e: STR .
+
+    $default  reduce using rule 53 (e)
+
+
+State 4
+
+    6 p: T . ID '(' dec_param_list ')' '{' s_list '}'
+    7  | T . ID '(' ')' '{' s_list '}'
+   14 s: T . Aid_list ';'
+   31 e: T . Did_list
+
+    ID  shift, and go to state 23
+
+    Aid_list  go to state 24
+    Aid       go to state 25
+    Did_list  go to state 26
+    Did       go to state 27
+
+
+State 5
+
+   57 e: INC . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 29
+
+
+State 6
+
+   58 e: DEC . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 30
+
+
+State 7
+
+   10 s: IF . '(' e ')' '{' s_list '}'
+   11  | IF . '(' e ')' '{' s_list '}' ELSE '{' s_list '}'
+
+    '('  shift, and go to state 31
+
+
+State 8
+
+   12 s: WHILE . '(' e ')' '{' s_list '}'
+
+    '('  shift, and go to state 32
+
+
+State 9
+
+   13 s: FOR . '(' e ';' e ';' e ')' '{' s_list '}'
+
+    '('  shift, and go to state 33
+
+
+State 10
+
+   17 s: RETURN . e ';'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 34
+
+
+State 11
+
+   15 s: PRINT . '(' param_list ')' ';'
+
+    '('  shift, and go to state 35
+
+
+State 12
+
+   30 e: INPUT . '(' ')'
+
+    '('  shift, and go to state 36
+
+
+State 13
+
+   50 e: '-' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 37
+
+
+State 14
+
+   34 e: '!' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 38
+
+
+State 15
+
+   37 e: '(' . e ')'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 39
+
+
+State 16
+
+    0 $accept: all . $end
+
+    $end  shift, and go to state 40
+
+
+State 17
+
+    1 all: p_list .
+
+    $default  reduce using rule 1 (all)
+
+
+State 18
+
+    2 p_list: p . p_list
+    5       | p .
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 4
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    $default  reduce using rule 5 (p_list)
+
+    p_list  go to state 41
+    p       go to state 18
+    s       go to state 19
+    e       go to state 20
+
+
+State 19
+
+    3 p_list: s . p_list
+    4       | s .
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 4
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    $default  reduce using rule 4 (p_list)
+
+    p_list  go to state 42
+    p       go to state 18
+    s       go to state 19
+    e       go to state 20
+
+
+State 20
+
+   16 s: e . ';'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ';'  shift, and go to state 60
+
+
+State 21
+
+   35 e: ID '(' . param_list ')'
+   36  | ID '(' . ')'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+    ')'    shift, and go to state 61
+
+    param_list  go to state 62
+    e           go to state 63
+
+
+State 22
+
+   59 e: ID '[' . e ']'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 64
+
+
+State 23
+
+    6 p: T ID . '(' dec_param_list ')' '{' s_list '}'
+    7  | T ID . '(' ')' '{' s_list '}'
+   25 Aid: ID . '[' NUM ']'
+   28 Did: ID .
+   29    | ID . '=' e
+
+    '='  shift, and go to state 65
+    '('  shift, and go to state 66
+    '['  shift, and go to state 67
+
+    '='       [reduce using rule 28 (Did)]
+    $default  reduce using rule 28 (Did)
+
+
+State 24
+
+   14 s: T Aid_list . ';'
+
+    ';'  shift, and go to state 68
+
+
+State 25
+
+   23 Aid_list: Aid . ',' Aid_list
+   24         | Aid .
+
+    ','  shift, and go to state 69
+
+    $default  reduce using rule 24 (Aid_list)
+
+
+State 26
+
+   31 e: T Did_list .
+
+    $default  reduce using rule 31 (e)
+
+
+State 27
+
+   26 Did_list: Did . ',' Did_list
+   27         | Did .
+
+    ','  shift, and go to state 70
+
+    ','       [reduce using rule 27 (Did_list)]
+    $default  reduce using rule 27 (Did_list)
+
+
+State 28
+
+   31 e: T . Did_list
+
+    ID  shift, and go to state 71
+
+    Did_list  go to state 26
+    Did       go to state 27
+
+
+State 29
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+   57  | INC e .
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 57 (e)
+
+
+State 30
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+   58  | DEC e .
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 58 (e)
+
+
+State 31
+
+   10 s: IF '(' . e ')' '{' s_list '}'
+   11  | IF '(' . e ')' '{' s_list '}' ELSE '{' s_list '}'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 72
+
+
+State 32
+
+   12 s: WHILE '(' . e ')' '{' s_list '}'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 73
+
+
+State 33
+
+   13 s: FOR '(' . e ';' e ';' e ')' '{' s_list '}'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 74
+
+
+State 34
+
+   17 s: RETURN e . ';'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ';'  shift, and go to state 75
+
+
+State 35
+
+   15 s: PRINT '(' . param_list ')' ';'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    param_list  go to state 76
+    e           go to state 63
+
+
+State 36
+
+   30 e: INPUT '(' . ')'
+
+    ')'  shift, and go to state 77
+
+
+State 37
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   50  | '-' e .
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    $default  reduce using rule 50 (e)
+
+
+State 38
+
+   32 e: e . OR e
+   33  | e . AND e
+   34  | '!' e .
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 34 (e)
+
+
+State 39
+
+   32 e: e . OR e
+   33  | e . AND e
+   37  | '(' e . ')'
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ')'  shift, and go to state 78
+
+
+State 40
+
+    0 $accept: all $end .
+
+    $default  accept
+
+
+State 41
+
+    2 p_list: p p_list .
+
+    $default  reduce using rule 2 (p_list)
+
+
+State 42
+
+    3 p_list: s p_list .
+
+    $default  reduce using rule 3 (p_list)
+
+
+State 43
+
+   55 e: e INC .
+
+    $default  reduce using rule 55 (e)
+
+
+State 44
+
+   56 e: e DEC .
+
+    $default  reduce using rule 56 (e)
+
+
+State 45
+
+   40 e: e LE . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 79
+
+
+State 46
+
+   41 e: e GE . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 80
+
+
+State 47
+
+   42 e: e EQ . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 81
+
+
+State 48
+
+   43 e: e NE . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 82
+
+
+State 49
+
+   33 e: e AND . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 83
+
+
+State 50
+
+   32 e: e OR . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 84
+
+
+State 51
+
+   51 e: e '=' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 85
+
+
+State 52
+
+   39 e: e '>' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 86
+
+
+State 53
+
+   38 e: e '<' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 87
+
+
+State 54
+
+   44 e: e '+' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 88
+
+
+State 55
+
+   45 e: e '-' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 89
+
+
+State 56
+
+   46 e: e '*' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 90
+
+
+State 57
+
+   47 e: e '/' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 91
+
+
+State 58
+
+   48 e: e '%' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 92
+
+
+State 59
+
+   49 e: e '^' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 93
+
+
+State 60
+
+   16 s: e ';' .
+
+    $default  reduce using rule 16 (s)
+
+
+State 61
+
+   36 e: ID '(' ')' .
+
+    $default  reduce using rule 36 (e)
+
+
+State 62
+
+   35 e: ID '(' param_list . ')'
+
+    ')'  shift, and go to state 94
+
+
+State 63
+
+   21 param_list: e . ',' param_list
+   22           | e .
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ','  shift, and go to state 95
+
+    $default  reduce using rule 22 (param_list)
+
+
+State 64
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+   59  | ID '[' e . ']'
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ']'  shift, and go to state 96
+
+
+State 65
+
+   29 Did: ID '=' . e
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 97
+
+
+State 66
+
+    6 p: T ID '(' . dec_param_list ')' '{' s_list '}'
+    7  | T ID '(' . ')' '{' s_list '}'
+
+    T    shift, and go to state 98
+    ')'  shift, and go to state 99
+
+    dec_param_list  go to state 100
+    dec_param       go to state 101
+
+
+State 67
+
+   25 Aid: ID '[' . NUM ']'
+
+    NUM  shift, and go to state 102
+
+
+State 68
+
+   14 s: T Aid_list ';' .
+
+    $default  reduce using rule 14 (s)
+
+
+State 69
+
+   23 Aid_list: Aid ',' . Aid_list
+
+    ID  shift, and go to state 103
+
+    Aid_list  go to state 104
+    Aid       go to state 25
+
+
+State 70
+
+   26 Did_list: Did ',' . Did_list
+
+    ID  shift, and go to state 71
+
+    Did_list  go to state 105
+    Did       go to state 27
+
+
+State 71
+
+   28 Did: ID .
+   29    | ID . '=' e
+
+    '='  shift, and go to state 65
+
+    '='       [reduce using rule 28 (Did)]
+    $default  reduce using rule 28 (Did)
+
+
+State 72
+
+   10 s: IF '(' e . ')' '{' s_list '}'
+   11  | IF '(' e . ')' '{' s_list '}' ELSE '{' s_list '}'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ')'  shift, and go to state 106
+
+
+State 73
+
+   12 s: WHILE '(' e . ')' '{' s_list '}'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ')'  shift, and go to state 107
+
+
+State 74
+
+   13 s: FOR '(' e . ';' e ';' e ')' '{' s_list '}'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ';'  shift, and go to state 108
+
+
+State 75
+
+   17 s: RETURN e ';' .
+
+    $default  reduce using rule 17 (s)
+
+
+State 76
+
+   15 s: PRINT '(' param_list . ')' ';'
+
+    ')'  shift, and go to state 109
+
+
+State 77
+
+   30 e: INPUT '(' ')' .
+
+    $default  reduce using rule 30 (e)
+
+
+State 78
+
+   37 e: '(' e ')' .
+
+    $default  reduce using rule 37 (e)
+
+
+State 79
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   40  | e LE e .
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 40 (e)
+
+
+State 80
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   41  | e GE e .
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 41 (e)
+
+
+State 81
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   42  | e EQ e .
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 42 (e)
+
+
+State 82
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   43  | e NE e .
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 43 (e)
+
+
+State 83
+
+   32 e: e . OR e
+   33  | e . AND e
+   33  | e AND e .
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 33 (e)
+
+
+State 84
+
+   32 e: e . OR e
+   32  | e OR e .
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 32 (e)
+
+
+State 85
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   51  | e '=' e .
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 51 (e)
+
+
+State 86
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   39  | e '>' e .
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 39 (e)
+
+
+State 87
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   38  | e '<' e .
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 38 (e)
+
+
+State 88
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   44  | e '+' e .
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 44 (e)
+
+
+State 89
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   45  | e '-' e .
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 45 (e)
+
+
+State 90
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   46  | e '*' e .
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 46 (e)
+
+
+State 91
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   47  | e '/' e .
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 47 (e)
+
+
+State 92
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   48  | e '%' e .
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 48 (e)
+
+
+State 93
+
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   49  | e '^' e .
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    $default  reduce using rule 49 (e)
+
+
+State 94
+
+   35 e: ID '(' param_list ')' .
+
+    $default  reduce using rule 35 (e)
+
+
+State 95
+
+   21 param_list: e ',' . param_list
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    param_list  go to state 110
+    e           go to state 63
+
+
+State 96
+
+   59 e: ID '[' e ']' .
+
+    $default  reduce using rule 59 (e)
+
+
+State 97
+
+   29 Did: ID '=' e .
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+
+    $default  reduce using rule 29 (Did)
+
+
+State 98
+
+   20 dec_param: T . ID
+
+    ID  shift, and go to state 111
+
+
+State 99
+
+    7 p: T ID '(' ')' . '{' s_list '}'
+
+    '{'  shift, and go to state 112
+
+
+State 100
+
+    6 p: T ID '(' dec_param_list . ')' '{' s_list '}'
+
+    ')'  shift, and go to state 113
+
+
+State 101
+
+   18 dec_param_list: dec_param . ',' dec_param_list
+   19               | dec_param .
+
+    ','  shift, and go to state 114
+
+    $default  reduce using rule 19 (dec_param_list)
+
+
+State 102
+
+   25 Aid: ID '[' NUM . ']'
+
+    ']'  shift, and go to state 115
+
+
+State 103
+
+   25 Aid: ID . '[' NUM ']'
+
+    '['  shift, and go to state 67
+
+
+State 104
+
+   23 Aid_list: Aid ',' Aid_list .
+
+    $default  reduce using rule 23 (Aid_list)
+
+
+State 105
+
+   26 Did_list: Did ',' Did_list .
+
+    $default  reduce using rule 26 (Did_list)
+
+
+State 106
+
+   10 s: IF '(' e ')' . '{' s_list '}'
+   11  | IF '(' e ')' . '{' s_list '}' ELSE '{' s_list '}'
+
+    '{'  shift, and go to state 116
+
+
+State 107
+
+   12 s: WHILE '(' e ')' . '{' s_list '}'
+
+    '{'  shift, and go to state 117
+
+
+State 108
+
+   13 s: FOR '(' e ';' . e ';' e ')' '{' s_list '}'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 118
+
+
+State 109
+
+   15 s: PRINT '(' param_list ')' . ';'
+
+    ';'  shift, and go to state 119
+
+
+State 110
+
+   21 param_list: e ',' param_list .
+
+    $default  reduce using rule 21 (param_list)
+
+
+State 111
+
+   20 dec_param: T ID .
+
+    $default  reduce using rule 20 (dec_param)
+
+
+State 112
+
+    7 p: T ID '(' ')' '{' . s_list '}'
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    s_list  go to state 121
+    s       go to state 122
+    e       go to state 20
+
+
+State 113
+
+    6 p: T ID '(' dec_param_list ')' . '{' s_list '}'
+
+    '{'  shift, and go to state 123
+
+
+State 114
+
+   18 dec_param_list: dec_param ',' . dec_param_list
+
+    T  shift, and go to state 98
+
+    dec_param_list  go to state 124
+    dec_param       go to state 101
+
+
+State 115
+
+   25 Aid: ID '[' NUM ']' .
+
+    $default  reduce using rule 25 (Aid)
+
+
+State 116
+
+   10 s: IF '(' e ')' '{' . s_list '}'
+   11  | IF '(' e ')' '{' . s_list '}' ELSE '{' s_list '}'
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    s_list  go to state 125
+    s       go to state 122
+    e       go to state 20
+
+
+State 117
+
+   12 s: WHILE '(' e ')' '{' . s_list '}'
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    s_list  go to state 126
+    s       go to state 122
+    e       go to state 20
+
+
+State 118
+
+   13 s: FOR '(' e ';' e . ';' e ')' '{' s_list '}'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ';'  shift, and go to state 127
+
+
+State 119
+
+   15 s: PRINT '(' param_list ')' ';' .
+
+    $default  reduce using rule 15 (s)
+
+
+State 120
+
+   14 s: T . Aid_list ';'
+   31 e: T . Did_list
+
+    ID  shift, and go to state 128
+
+    Aid_list  go to state 24
+    Aid       go to state 25
+    Did_list  go to state 26
+    Did       go to state 27
+
+
+State 121
+
+    7 p: T ID '(' ')' '{' s_list . '}'
+
+    '}'  shift, and go to state 129
+
+
+State 122
+
+    8 s_list: s . s_list
+    9       | s .
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    $default  reduce using rule 9 (s_list)
+
+    s_list  go to state 130
+    s       go to state 122
+    e       go to state 20
+
+
+State 123
+
+    6 p: T ID '(' dec_param_list ')' '{' . s_list '}'
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    s_list  go to state 131
+    s       go to state 122
+    e       go to state 20
+
+
+State 124
+
+   18 dec_param_list: dec_param ',' dec_param_list .
+
+    $default  reduce using rule 18 (dec_param_list)
+
+
+State 125
+
+   10 s: IF '(' e ')' '{' s_list . '}'
+   11  | IF '(' e ')' '{' s_list . '}' ELSE '{' s_list '}'
+
+    '}'  shift, and go to state 132
+
+
+State 126
+
+   12 s: WHILE '(' e ')' '{' s_list . '}'
+
+    '}'  shift, and go to state 133
+
+
+State 127
+
+   13 s: FOR '(' e ';' e ';' . e ')' '{' s_list '}'
+
+    ID     shift, and go to state 1
+    NUM    shift, and go to state 2
+    STR    shift, and go to state 3
+    T      shift, and go to state 28
+    INC    shift, and go to state 5
+    DEC    shift, and go to state 6
+    INPUT  shift, and go to state 12
+    '-'    shift, and go to state 13
+    '!'    shift, and go to state 14
+    '('    shift, and go to state 15
+
+    e  go to state 134
+
+
+State 128
+
+   25 Aid: ID . '[' NUM ']'
+   28 Did: ID .
+   29    | ID . '=' e
+
+    '='  shift, and go to state 65
+    '['  shift, and go to state 67
+
+    '='       [reduce using rule 28 (Did)]
+    $default  reduce using rule 28 (Did)
+
+
+State 129
+
+    7 p: T ID '(' ')' '{' s_list '}' .
+
+    $default  reduce using rule 7 (p)
+
+
+State 130
+
+    8 s_list: s s_list .
+
+    $default  reduce using rule 8 (s_list)
+
+
+State 131
+
+    6 p: T ID '(' dec_param_list ')' '{' s_list . '}'
+
+    '}'  shift, and go to state 135
+
+
+State 132
+
+   10 s: IF '(' e ')' '{' s_list '}' .
+   11  | IF '(' e ')' '{' s_list '}' . ELSE '{' s_list '}'
+
+    ELSE  shift, and go to state 136
+
+    $default  reduce using rule 10 (s)
+
+
+State 133
+
+   12 s: WHILE '(' e ')' '{' s_list '}' .
+
+    $default  reduce using rule 12 (s)
+
+
+State 134
+
+   13 s: FOR '(' e ';' e ';' e . ')' '{' s_list '}'
+   32 e: e . OR e
+   33  | e . AND e
+   38  | e . '<' e
+   39  | e . '>' e
+   40  | e . LE e
+   41  | e . GE e
+   42  | e . EQ e
+   43  | e . NE e
+   44  | e . '+' e
+   45  | e . '-' e
+   46  | e . '*' e
+   47  | e . '/' e
+   48  | e . '%' e
+   49  | e . '^' e
+   51  | e . '=' e
+   55  | e . INC
+   56  | e . DEC
+
+    INC  shift, and go to state 43
+    DEC  shift, and go to state 44
+    LE   shift, and go to state 45
+    GE   shift, and go to state 46
+    EQ   shift, and go to state 47
+    NE   shift, and go to state 48
+    AND  shift, and go to state 49
+    OR   shift, and go to state 50
+    '='  shift, and go to state 51
+    '>'  shift, and go to state 52
+    '<'  shift, and go to state 53
+    '+'  shift, and go to state 54
+    '-'  shift, and go to state 55
+    '*'  shift, and go to state 56
+    '/'  shift, and go to state 57
+    '%'  shift, and go to state 58
+    '^'  shift, and go to state 59
+    ')'  shift, and go to state 137
+
+
+State 135
+
+    6 p: T ID '(' dec_param_list ')' '{' s_list '}' .
+
+    $default  reduce using rule 6 (p)
+
+
+State 136
+
+   11 s: IF '(' e ')' '{' s_list '}' ELSE . '{' s_list '}'
+
+    '{'  shift, and go to state 138
+
+
+State 137
+
+   13 s: FOR '(' e ';' e ';' e ')' . '{' s_list '}'
+
+    '{'  shift, and go to state 139
+
+
+State 138
+
+   11 s: IF '(' e ')' '{' s_list '}' ELSE '{' . s_list '}'
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    s_list  go to state 140
+    s       go to state 122
+    e       go to state 20
+
+
+State 139
+
+   13 s: FOR '(' e ';' e ';' e ')' '{' . s_list '}'
+
+    ID      shift, and go to state 1
+    NUM     shift, and go to state 2
+    STR     shift, and go to state 3
+    T       shift, and go to state 120
+    INC     shift, and go to state 5
+    DEC     shift, and go to state 6
+    IF      shift, and go to state 7
+    WHILE   shift, and go to state 8
+    FOR     shift, and go to state 9
+    RETURN  shift, and go to state 10
+    PRINT   shift, and go to state 11
+    INPUT   shift, and go to state 12
+    '-'     shift, and go to state 13
+    '!'     shift, and go to state 14
+    '('     shift, and go to state 15
+
+    s_list  go to state 141
+    s       go to state 122
+    e       go to state 20
+
+
+State 140
+
+   11 s: IF '(' e ')' '{' s_list '}' ELSE '{' s_list . '}'
+
+    '}'  shift, and go to state 142
+
+
+State 141
+
+   13 s: FOR '(' e ';' e ';' e ')' '{' s_list . '}'
+
+    '}'  shift, and go to state 143
+
+
+State 142
+
+   11 s: IF '(' e ')' '{' s_list '}' ELSE '{' s_list '}' .
+
+    $default  reduce using rule 11 (s)
+
+
+State 143
+
+   13 s: FOR '(' e ';' e ';' e ')' '{' s_list '}' .
+
+    $default  reduce using rule 13 (s)
